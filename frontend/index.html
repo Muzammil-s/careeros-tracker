@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="CareerOS — Job application management platform with drag-and-drop Kanban pipeline, deadline alerts, resume version tracking, and conversion analytics." />
+  <title>CareerOS — Job Application Pipeline &amp; Analytics</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-badge">CO</div>
+      <div>
+        <strong>CareerOS</strong>
+        <small id="api-badge">Connecting...</small>
+      </div>
+    </div>
+
+    <div class="top-stats">
+      <div class="pill-stat"><span>Tracked</span><strong id="top-total">0</strong></div>
+      <div class="pill-stat"><span>Response Rate</span><strong id="top-rate">0%</strong></div>
+      <div class="pill-stat"><span>Due &le; 7d</span><strong id="top-due">0</strong></div>
+    </div>
+
+    <div class="top-actions">
+      <button class="tab-btn active" data-view="board" type="button">Kanban Pipeline</button>
+      <button class="tab-btn" data-view="analytics" type="button">Career Analytics</button>
+      <button id="btn-new-app" class="btn btn-primary" type="button">+ Track Role</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <!-- Toolbar -->
+    <section class="toolbar">
+      <input id="search-input" type="search" placeholder="Filter by company, role, location, or CV tag..." aria-label="Filter job applications" />
+      <select id="priority-filter" aria-label="Filter by priority">
+        <option value="all">All Priorities</option>
+        <option value="High">High Priority</option>
+        <option value="Medium">Medium Priority</option>
+        <option value="Low">Low Priority</option>
+      </select>
+      <button id="btn-export-json" class="btn btn-secondary" type="button">Export JSON</button>
+    </section>
+
+    <!-- VIEW 1: KANBAN PIPELINE -->
+    <section id="view-board" class="kanban-board" aria-live="polite"></section>
+
+    <!-- VIEW 2: ANALYTICS -->
+    <section id="view-analytics" class="analytics-wrap" hidden>
+      <div class="analytics-grid">
+        <div class="panel">
+          <h2>Stage Conversion Funnel (Sample Demo Data)</h2>
+          <div id="funnel-chart"></div>
+        </div>
+        <div class="panel">
+          <h2>Resume Version Performance</h2>
+          <div id="resume-stats" class="resume-list"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Upcoming Application &amp; OA Deadlines</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Role</th>
+                <th>Stage</th>
+                <th>Resume</th>
+                <th>Deadline</th>
+                <th>Days Remaining</th>
+              </tr>
+            </thead>
+            <tbody id="deadline-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add / Edit Application Modal -->
+  <div id="app-modal" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="modal-title">Track New Job Application</h2>
+        <button id="close-modal" class="icon-btn" type="button">&times;</button>
+      </div>
+      <form id="app-form" class="stack-form">
+        <input id="edit-id" type="hidden" />
+        <div class="two-col">
+          <input id="f-company" type="text" placeholder="Company Name" required />
+          <input id="f-role" type="text" placeholder="Role Title" required />
+        </div>
+        <div class="two-col">
+          <input id="f-location" type="text" placeholder="Location (e.g. Remote / Lahore)" value="Remote" />
+          <input id="f-comp" type="text" placeholder="Compensation / Stipend" value="Competitive" />
+        </div>
+        <div class="three-col">
+          <select id="f-stage">
+            <option value="Wishlist">Wishlist</option>
+            <option value="Applied">Applied</option>
+            <option value="OA / Screen">OA / Screen</option>
+            <option value="Interview">Interview</option>
+            <option value="Offer">Offer</option>
+            <option value="Archived">Archived</option>
+          </select>
+          <select id="f-priority">
+            <option value="High">High Priority</option>
+            <option value="Medium" selected>Medium Priority</option>
+            <option value="Low">Low Priority</option>
+          </select>
+          <input id="f-deadline" type="date" required />
+        </div>
+        <div class="two-col">
+          <input id="f-resume" type="text" placeholder="Resume Version" value="CV-v2.4-FullStack" />
+          <input id="f-url" type="url" placeholder="Posting URL (optional)" />
+        </div>
+        <textarea id="f-notes" rows="3" placeholder="Interview prep notes, recruiter contact, key skills..."></textarea>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-primary" style="flex:1;" type="submit">Save Application</button>
+          <button id="btn-delete-app" class="btn btn-danger" type="button" hidden>Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

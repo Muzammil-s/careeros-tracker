@@ -1,0 +1,11 @@
+{
+  "name": "careeros-tracker",
+  "version": "1.0.0",
+  "description": "CareerOS Job Application Management Platform with drag-and-drop Kanban pipeline, deadlines, resume version analytics, and JSON export",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "test": "node --test tests/careeros.test.mjs"
+  },
+  "license": "MIT"
+}
