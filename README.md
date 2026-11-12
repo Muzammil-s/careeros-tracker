@@ -4,6 +4,11 @@
 
 ---
 
+## Live Demo
+
+- **Production URL:** [https://careeros-tracker-one.vercel.app/](https://careeros-tracker-one.vercel.app/)
+- **Mode:** Live interactive Kanban and career analytics demo deployed on Vercel (full Express API backend included in repo for local Node execution).
+
 ## Application Preview
 
 ![CareerOS Kanban & Analytics](docs/screenshot.png)
